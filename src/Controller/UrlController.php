@@ -30,10 +30,10 @@ class UrlController extends AbstractController
             $urlDto = $serializer->denormalize($data, UrlDto::class);
 
             // Integrate Flow
-            $flow = (new FlowFactory())->create(function() use (&$data, $urlDto) {
-                yield function ($url) use (&$data, $urlDto) {
+            $flow = (new FlowFactory())->create(function() use (&$data) {
+                yield function ($url) use (&$data) {
                     // Fetch URL content
-                    $response = $this->httpClient->request('GET', $urlDto->url);
+                    $response = $this->httpClient->request('GET', $url);
                     $content = $response->getContent();
 
                     // Initialize OpenAI client
