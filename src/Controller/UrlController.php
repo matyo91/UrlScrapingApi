@@ -5,8 +5,13 @@ namespace App\Controller;
 use App\Dto\UrlDto;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use OpenAI;
+use Flow\Flow\Flow;
+use Flow\FlowFactory;
+use Flow\Ip;
 
 class UrlController extends AbstractController
 {
@@ -15,37 +20,52 @@ class UrlController extends AbstractController
         private string $openaiApiKey
     ) {}
 
-    public function __invoke(UrlDto $data): JsonResponse
+    public function __invoke(Request $request, SerializerInterface $serializer): JsonResponse
     {
         try {
-            // Fetch URL content
-            $response = $this->httpClient->request('GET', $data->url);
-            $content = $response->getContent();
+            // Decode JSON request body
+            $data = json_decode($request->getContent(), true);
 
-            // Initialize OpenAI client
-            $client = OpenAI::client($this->openaiApiKey);
+            // Deserialize into UrlDto
+            $urlDto = $serializer->denormalize($data, UrlDto::class);
 
-            // Get summary and tags from ChatGPT
-            $result = $client->chat()->create([
-                'model' => 'gpt-4o-mini',
-                'messages' => [
-                    ['role' => 'system', 'content' => 'First provide a concise summary of the webpage content. Then on a new line after "TAGS:", list up to 10 relevant single-word or short-phrase tags, separated by commas.'],
-                    ['role' => 'user', 'content' => $content],
-                ],
-                'max_tokens' => 400
-            ]);
+            // Integrate Flow
+            $flow = (new FlowFactory())->create(function() use (&$data, $urlDto) {
+                yield function ($url) use (&$data, $urlDto) {
+                    // Fetch URL content
+                    $response = $this->httpClient->request('GET', $urlDto->url);
+                    $content = $response->getContent();
 
-            // Split the response into summary and tags
-            $response = $result->choices[0]->message->content;
-            $parts = explode('TAGS:', $response);
+                    // Initialize OpenAI client
+                    $client = OpenAI::client($this->openaiApiKey);
+
+                    // Get summary and tags from ChatGPT
+                    $result = $client->chat()->create([
+                        'model' => 'gpt-4o-mini',
+                        'messages' => [
+                            ['role' => 'system', 'content' => 'First provide a concise summary of the webpage content. Then on a new line after "TAGS:", list up to 10 relevant single-word or short-phrase tags, separated by commas.'],
+                            ['role' => 'user', 'content' => $content],
+                        ],
+                        'max_tokens' => 400
+                    ]);
+
+                    // Split the response into summary and tags
+                    $data = $result->choices[0]->message->content;
+                };
+            });
+
+            $ip = new Ip($urlDto->url);
+            $flow($ip);
+            $flow->await();
+
+            $parts = explode('TAGS:', $data);
             $summary = trim($parts[0]);
             $tags = isset($parts[1]) ? array_map('trim', explode(',', trim($parts[1]))) : [];
 
             return new JsonResponse([
-                'url' => $data->url,
+                'url' => $urlDto->url,
                 'summary' => $summary,
                 'tags' => $tags,
-                'message' => 'URL processed successfully'
             ]);
 
         } catch (\Exception $e) {

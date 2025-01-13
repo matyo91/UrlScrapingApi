@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bdbe291fad78e686aa994253218991e8",
+    "content-hash": "6ec1e01c91fce13d23ac98f77277edce",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -1110,6 +1110,80 @@
                 "source": "https://github.com/api-platform/validator/tree/v4.0.13"
             },
             "time": "2024-11-04T14:21:40+00:00"
+        },
+        {
+            "name": "darkwood/flow",
+            "version": "v1.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/darkwood-com/flow.git",
+                "reference": "c8b06704494530c74d0657f5fccd5d3f3ece11e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/darkwood-com/flow/zipball/c8b06704494530c74d0657f5fccd5d3f3ece11e5",
+                "reference": "c8b06704494530c74d0657f5fccd5d3f3ece11e5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.3",
+                "symfony/event-dispatcher": "^7.0",
+                "symfony/messenger": "^7.0"
+            },
+            "require-dev": {
+                "amphp/amp": "^3.0",
+                "openswoole/ide-helper": "^22.1.5",
+                "react/async": "^4.3",
+                "spatie/async": "^1.6",
+                "symfony/doctrine-messenger": "^7.0",
+                "symfony/orm-pack": "^2.4"
+            },
+            "suggest": {
+                "amphp/amp": "Provide asynchronous with AMP",
+                "ext-openswoole": "Provide asynchronous with OpenSwoole",
+                "react/async": "Provide asynchronous with ReactPHP",
+                "spatie/async": "Provide asynchronous with Spatie",
+                "symfony/messenger": "Provide Symfony Messenger support"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Flow\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mathieu Ledru",
+                    "email": "mathieu@darkwood.fr"
+                }
+            ],
+            "description": "Flow",
+            "keywords": [
+                "amphp",
+                "async",
+                "fiber",
+                "monad",
+                "php",
+                "reactphp",
+                "spatie",
+                "swoole",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/darkwood-com/flow/issues",
+                "source": "https://github.com/darkwood-com/flow/tree/v1.2.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/matyo91",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-12-24T12:47:46+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -5301,6 +5375,93 @@
                 }
             ],
             "time": "2024-12-31T14:59:40+00:00"
+        },
+        {
+            "name": "symfony/messenger",
+            "version": "v7.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/messenger.git",
+                "reference": "cc0e820c02a0a887a88ddb52b7c4de4634677ce6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/messenger/zipball/cc0e820c02a0a887a88ddb52b7c4de4634677ce6",
+                "reference": "cc0e820c02a0a887a88ddb52b7c4de4634677ce6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "psr/log": "^1|^2|^3",
+                "symfony/clock": "^6.4|^7.0",
+                "symfony/deprecation-contracts": "^2.5|^3"
+            },
+            "conflict": {
+                "symfony/console": "<7.2",
+                "symfony/event-dispatcher": "<6.4",
+                "symfony/event-dispatcher-contracts": "<2.5",
+                "symfony/framework-bundle": "<6.4",
+                "symfony/http-kernel": "<6.4",
+                "symfony/serializer": "<6.4"
+            },
+            "require-dev": {
+                "psr/cache": "^1.0|^2.0|^3.0",
+                "symfony/console": "^7.2",
+                "symfony/dependency-injection": "^6.4|^7.0",
+                "symfony/event-dispatcher": "^6.4|^7.0",
+                "symfony/http-kernel": "^6.4|^7.0",
+                "symfony/process": "^6.4|^7.0",
+                "symfony/property-access": "^6.4|^7.0",
+                "symfony/rate-limiter": "^6.4|^7.0",
+                "symfony/routing": "^6.4|^7.0",
+                "symfony/serializer": "^6.4|^7.0",
+                "symfony/service-contracts": "^2.5|^3",
+                "symfony/stopwatch": "^6.4|^7.0",
+                "symfony/validator": "^6.4|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Messenger\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samuel Roze",
+                    "email": "samuel.roze@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Helps applications send and receive messages to/from other applications or via message queues",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/messenger/tree/v7.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-12-07T08:08:50+00:00"
         },
         {
             "name": "symfony/password-hasher",
