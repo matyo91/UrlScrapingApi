@@ -8,6 +8,7 @@ This project is a Symfony-based web application that utilizes various components
 - Tag generation using OpenAI's GPT model
 - API Platform integration for easy API management
 - Symfony framework for robust application structure
+- Flow integration for enhanced workflow automation (https://flow.darkwood.com)
 
 ## Requirements
 
