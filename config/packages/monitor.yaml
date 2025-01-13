@@ -1,0 +1,10 @@
+liip_monitor:
+    checks:
+        php_extensions:
+            - json
+            - pdo
+        disk_usage:
+            warning: 70
+            critical: 90
+        #symfony_requirements:
+        #    file: '%kernel.project_dir%/app/SymfonyRequirements.php'
