@@ -1,4 +1,8 @@
-# Project Name
+# UrlScrapingApi
+
+<p align="center">
+  <img src="public/logo.png" alt="URL Scraping API Logo" width="200"/>
+</p>
 
 This project is a Symfony-based web application that utilizes various components such as Flow, API Platform, and OpenAI integration. It is designed to scrape URLs, summarize their content, and generate relevant tags using OpenAI's GPT model.
 
@@ -83,3 +87,4 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
+
