@@ -10,7 +10,7 @@ This project is a Symfony-based web application that utilizes various components
 
 - URL scraping and content summarization
 - Tag generation using OpenAI's GPT model
-- API Platform integration for easy API management
+- API Platform integration for easy API management (https://api-platform.com)
 - Symfony framework for robust application structure
 - Flow integration for enhanced workflow automation (https://flow.darkwood.com)
 
@@ -73,12 +73,6 @@ This project is a Symfony-based web application that utilizes various components
    ```
 
    The response will include a summary and tags for the provided URL.
-
-## Configuration
-
-- **API Platform:** Configured in `config/packages/api_platform.yaml`
-- **Doctrine ORM:** Configured in `config/packages/doctrine.yaml`
-- **OpenAI Integration:** Implemented in `src/Controller/UrlController.php` (startLine: 1, endLine: 76)
 
 ## Contributing
 
